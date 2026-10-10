@@ -1,0 +1,37 @@
+{
+    "orders": [
+        {
+            "customer": "Ankit Kumar",
+            "ingredients": ["BUN", "LETTUCE", "ONION", "TOMATO", "PATTY", "LETTUCE", "BUN"]
+        },
+        {
+            "customer": "Henry Li",
+            "ingredients": ["BUN", "KETCHUP","MUSTARD", "PATTY", "ONION", "BUN"]
+        },
+        {
+            "customer": "Sunay Jain",
+            "ingredients": ["BUN", "PATTY", "LETTUCE", "LETTUCE", "PATTY", "ONION", "KETCHUP", "BUN", "PATTY", "LETTUCE", "KETCHUP", "MUSTARD", "ONION", "BUN"]
+        },
+        {
+            "customer": "Ethan Jones",
+            "ingredients": ["BUN", "BUN"]
+        },
+        {
+            "customer": "Alex Weng",
+            "ingredients": ["BUN", "PATTY", "CHEESE", "LETTUCE", "BUN"]
+        },
+        {
+            "customer": "Joseph Chen",
+            "ingredients": ["BUN", "PATTY", "LETTUCE", "TOMATO", "ONION", "KETCHIP", "BUN"]
+        },
+        {
+            "customer": "Stephanie Zhu",
+            "ingredients": ["BUN", "OSU", "BUN"]
+        },
+        {
+            "customer": "Ennio Wong",
+            "ingredients": ["BUN", "ONION", "PATTY", "CHEESE", "KETCHUP", "LETTUCE", "PATTY", "BUN"]
+        }
+
+    ]
+}
