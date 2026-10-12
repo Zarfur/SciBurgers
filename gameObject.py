@@ -5,7 +5,7 @@ import pygame
 class GameObject:
 
     DRAG = 0.9
-    MAX_SPEED = 6
+    MAX_SPEED = 9999
     GRAVITY = 0.5
 
     def __init__(self, x, y, image):

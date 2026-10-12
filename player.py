@@ -2,14 +2,15 @@ import math
 import pygame
 from gameObject import GameObject
 from ingredient import Ingredient
+from customer import Customer, state
 
 class Player(GameObject):
-    TURN_SPEED = 6
 
     def __init__(self, x, y, image, speed):
         super().__init__(x,y,image)
         self.current_ingredient = None
         self.speed = speed
+        self.hp = 100
 
     def inputs(self, keys):
 
@@ -20,13 +21,21 @@ class Player(GameObject):
         if keys[pygame.K_SPACE]: self.throw()
 
     def check_collision(self, other):
-        if self.current_ingredient is not None and other is not Ingredient: return
-        elif self.hitbox.colliderect(other.hitbox):
+        if self.hitbox.colliderect(other.hitbox):
+            if other is Customer:
+                if other.state == state.idle: return True
+                else:
+                    self.hp -= 1
+                    return False
+
+            if self.current_ingredient is not None and not isinstance(other, Ingredient): return False
+            
             self.pick_up(other)
+            return False
 
 
     def pick_up(self, ingredient):
-        if self.current_ingredient is None:
+        if self.current_ingredient is None and isinstance(ingredient, Ingredient):
             self.current_ingredient = ingredient
             ingredient.carry(self)
             ingredient.carrying = True

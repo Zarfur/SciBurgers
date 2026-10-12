@@ -1,37 +1,36 @@
 {
     "orders": [
         {
-            "customer": "Ankit Kumar",
-            "ingredients": ["BUN", "LETTUCE", "ONION", "TOMATO", "PATTY", "LETTUCE", "BUN"]
+            "customer": "Ankit",
+            "ingredients": ["type.bun", "type.lettuce", "type.onion", "type.tomato", "type.patty", "type.lettuce", "type.bun"]
         },
         {
-            "customer": "Henry Li",
-            "ingredients": ["BUN", "KETCHUP","MUSTARD", "PATTY", "ONION", "BUN"]
+            "customer": "Henry",
+            "ingredients": ["type.bun", "type.ketchup","type.mustard", "type.patty", "type.onion", "type.bun"]
         },
         {
-            "customer": "Sunay Jain",
-            "ingredients": ["BUN", "PATTY", "LETTUCE", "LETTUCE", "PATTY", "ONION", "KETCHUP", "BUN", "PATTY", "LETTUCE", "KETCHUP", "MUSTARD", "ONION", "BUN"]
+            "customer": "Sunay",
+            "ingredients": ["type.bun", "type.patty", "type.lettuce", "type.lettuce", "type.patty", "type.onion", "type.ketchup", "type.bun", "type.patty", "type.lettuce", "type.ketchup", "type.mustard", "type.onion", "type.bun"]
         },
         {
-            "customer": "Ethan Jones",
-            "ingredients": ["BUN", "BUN"]
+            "customer": "Ethan",
+            "ingredients": ["type.bun", "type.bun"]
         },
         {
-            "customer": "Alex Weng",
-            "ingredients": ["BUN", "PATTY", "CHEESE", "LETTUCE", "BUN"]
+            "customer": "Alex",
+            "ingredients": ["type.bun", "type.patty", "type.cheese", "type.lettuce", "type.bun"]
         },
         {
-            "customer": "Joseph Chen",
-            "ingredients": ["BUN", "PATTY", "LETTUCE", "TOMATO", "ONION", "KETCHIP", "BUN"]
+            "customer": "Joseph",
+            "ingredients": ["type.bun", "type.patty", "type.lettuce", "type.tomato", "type.onion", "type.ketchup", "type.bun"]
         },
         {
-            "customer": "Stephanie Zhu",
-            "ingredients": ["BUN", "OSU", "BUN"]
+            "customer": "Stephanie",
+            "ingredients": ["type.bun", "type.osu", "type.bun"]
         },
         {
-            "customer": "Ennio Wong",
-            "ingredients": ["BUN", "ONION", "PATTY", "CHEESE", "KETCHUP", "LETTUCE", "PATTY", "BUN"]
+            "customer": "Ennio",
+            "ingredients": ["type.bun", "type.onion", "type.patty", "type.cheese", "type.ketchup", "type.lettuce", "type.patty", "type.bun"]
         }
-
     ]
 }
