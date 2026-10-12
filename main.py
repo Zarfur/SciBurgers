@@ -3,16 +3,16 @@ import math
 import pygame
 import asyncio 
 from player import Player
-from enemy import Enemy
 from ingredient import Ingredient
 from camera import Camera
 from orderlist import Orderlist
 from ingredient import type
+from customer import Customer
 
 async def main():
 
-    GAME_WIDTH = 800
-    GAME_HEIGHT = 600
+    GAME_WIDTH = 2600
+    GAME_HEIGHT = 1800
     WIDTH = 800
     HEIGHT = 600
 
