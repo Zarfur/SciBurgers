@@ -3,7 +3,7 @@ import enum
 import pygame
 from gameObject import GameObject
 
-class type(enum.Enum):
+class ingType(enum.Enum):
     bun = ("BUN", 1, 1)
     patty = ("PATTY", 20, 2)
     cheese = ("CHEESE", 10, 1)
@@ -25,26 +25,20 @@ class Ingredient(GameObject):
     THROW_UP = -5
     y_offset = pygame.Vector2(0, -10)
     
-    def __init__(self, x, y, type):
-        super().__init__(x, y, self.get_ingredient_image(type))
-        self.ingredient_stack = [type]
+    def __init__(self, x, y, ingType):
+        super().__init__(x, y, self.get_ingredient_image(ingType))
+        self.ingredient_stack = [ingType]
         self.carrying = False
         self.parent = None
         self.inAir = False
         self.defaultY = self.position.y 
         self.damage = 0
 
-
-
     def draw(self, screen, camera):
-        #pygame.draw.rect(screen, (255, 0, 0), self.hitbox, 2)
-        bottom = self.hitbox.y
-        for i in self.ingredient_stack: bottom += i.offset
         height = 0
         for ingredient in self.ingredient_stack:
             ingredient_image = self.get_ingredient_image(ingredient)
-            draw_y  =  self.position.y - height - ingredient_image.get_height()
-
+            draw_y = self.position.y - height - ingredient_image.get_height()
             screen.blit(ingredient_image, camera.apply(pygame.Vector2(self.position.x, draw_y)))
             height += ingredient.offset
 
@@ -55,13 +49,13 @@ class Ingredient(GameObject):
         return image
 
     def collide(self, other):
-        # just add enemy hit to this collide 
         if not isinstance(other, Ingredient) or self.carrying or other.carrying: return False
         if self.hitbox.colliderect(other.hitbox):
             self.ingredient_stack.extend(other.ingredient_stack)
-            self.print_ingredients()
+            #self.print_ingredients()
             self.update_hitbox() 
             return True
+        return False
 
     def carry(self, player):
         self.parent = player

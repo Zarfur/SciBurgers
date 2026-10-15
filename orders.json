@@ -2,35 +2,35 @@
     "orders": [
         {
             "customer": "Ankit",
-            "ingredients": ["type.bun", "type.lettuce", "type.onion", "type.tomato", "type.patty", "type.lettuce", "type.bun"]
+            "ingredients": ["bun", "lettuce", "onion", "patty", "lettuce", "bun"]
         },
         {
             "customer": "Henry",
-            "ingredients": ["type.bun", "type.ketchup","type.mustard", "type.patty", "type.onion", "type.bun"]
+            "ingredients": ["bun", "ketchup", "mustard", "patty", "onion", "bun"]
         },
         {
             "customer": "Sunay",
-            "ingredients": ["type.bun", "type.patty", "type.lettuce", "type.lettuce", "type.patty", "type.onion", "type.ketchup", "type.bun", "type.patty", "type.lettuce", "type.ketchup", "type.mustard", "type.onion", "type.bun"]
+            "ingredients": ["bun", "patty", "lettuce", "lettuce", "patty", "onion", "ketchup", "bun", "patty", "lettuce", "ketchup", "mustard", "onion", "bun"]
         },
         {
             "customer": "Ethan",
-            "ingredients": ["type.bun", "type.bun"]
+            "ingredients": ["bun", "bun"]
         },
         {
             "customer": "Alex",
-            "ingredients": ["type.bun", "type.patty", "type.cheese", "type.lettuce", "type.bun"]
+            "ingredients": ["bun", "patty", "cheese", "lettuce", "bun"]
         },
         {
             "customer": "Joseph",
-            "ingredients": ["type.bun", "type.patty", "type.lettuce", "type.tomato", "type.onion", "type.ketchup", "type.bun"]
+            "ingredients": ["bun", "patty", "lettuce", "onion", "ketchup", "bun"]
         },
         {
             "customer": "Stephanie",
-            "ingredients": ["type.bun", "type.osu", "type.bun"]
+            "ingredients": ["bun", "osu", "bun"]
         },
         {
             "customer": "Ennio",
-            "ingredients": ["type.bun", "type.onion", "type.patty", "type.cheese", "type.ketchup", "type.lettuce", "type.patty", "type.bun"]
+            "ingredients": ["bun", "onion", "patty", "cheese", "ketchup", "lettuce", "patty", "bun"]
         }
     ]
 }

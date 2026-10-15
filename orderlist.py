@@ -1,5 +1,6 @@
 import pygame
 import json
+from ingredient import ingType
 
 class Orderlist:
 
@@ -8,22 +9,27 @@ class Orderlist:
         self.x = x
         self.y = y
         self.customer = customer
-        self.font = pygame.font.SysFont("Arial", 36)
+        self.font = pygame.font.SysFont("Arial", 12)
+        self.order = []
 
 
 
     def load_orders(self, filename):
-        if self.order is not None:
+        if len(self.order) <= 0:
             with open(filename, 'r') as file:
                 data = json.load(file)
-                self.order = None
                 for order in data['orders']:
                     if order['customer'] == self.customer:
-                        self.order = order['order']
-                        break
+                        for i in order['ingredients']:
+                            self.order.append(ingType[i])
 
-    def draw(self, screen):
+    def draw(self, screen, x, y):
+        height = len(self.order) * 20
+        pygame.draw.rect(screen, (255, 255, 255), (x, y, 200, height))
+        
+        name = self.font.render(self.customer, True, (0, 0, 0))
+        screen.blit(name, (x + 5, y))
+
         for i, ingredient in enumerate(self.order):
-            text_pos = text_surface.get_rect(center=(self.x, self.y + i * 40))
-            text_surface = self.font.render(f"{i}). {ingredient}", True, (255, 255, 255))
-            screen.blit(text_surface, text_pos)
+            text_surface = self.font.render(f"{i}). {ingredient.name}", True, (0, 0, 0))
+            screen.blit(text_surface, (x + 5, y + i * 15 + 15))

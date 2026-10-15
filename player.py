@@ -22,15 +22,18 @@ class Player(GameObject):
 
     def check_collision(self, other):
         if self.hitbox.colliderect(other.hitbox):
-            if other is Customer:
-                if other.state == state.idle: return True
+            if isinstance(other, Customer):
+                if other.state == state.idle: 
+                    return True
                 else:
                     self.hp -= 1
                     return False
 
-            if self.current_ingredient is not None and not isinstance(other, Ingredient): return False
-            
-            self.pick_up(other)
+            if self.current_ingredient is not None: return False
+            if isinstance(other, Ingredient):
+                if other.inAir == False:
+                    self.pick_up(other)
+
             return False
 
 

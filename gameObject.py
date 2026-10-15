@@ -5,7 +5,7 @@ import pygame
 class GameObject:
 
     DRAG = 0.9
-    MAX_SPEED = 9999
+    MAX_SPEED = 18
     GRAVITY = 0.5
 
     def __init__(self, x, y, image):
@@ -26,6 +26,9 @@ class GameObject:
 
         if self.velocity.length() > self.MAX_SPEED:
             self.velocity.scale_to_length(self.MAX_SPEED)
+
+        if self.velocity.length() > 0.1:
+            self.forward = self.velocity.normalize()
 
         self.position += self.velocity
         self.velocity *= self.DRAG
