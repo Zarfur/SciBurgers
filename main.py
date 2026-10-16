@@ -98,13 +98,13 @@ async def main():
                     player.take_damage()
                     score -= 1
             if customer.hp <= 0:
-                customer.ascend(customers)
+                score += customer.ascend(customers)
 
         for customer in customers[:]:
             for ingredient in ingredients[:]:
                 value = customer.take_order(ingredient, player, ingredients, orderlists)
                 if value == 0:
-                    customer.ascend(customers, score)
+                    score += customer.ascend(customers)
                 elif value == 1:
                     customer.take_damage()
                     customer.hp -= ingredient.damage

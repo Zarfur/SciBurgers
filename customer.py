@@ -88,13 +88,12 @@ class Customer(GameObject):
 
 
 
-    def ascend(self, customers, score):
-        if self.hp <= 0:
-            score += 5
-        else:
-            score += 30
+    def ascend(self, customers):
         if self in customers:
             customers.remove(self)
+        if self.hp <= 0:
+            return 5
+        return 30
 
 
     def idle(self):
