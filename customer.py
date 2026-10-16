@@ -50,7 +50,7 @@ class Customer(GameObject):
             self.given = True
             new_order = Orderlist(0, 0, self.name)
 
-            new_order.load_orders("SciBurgers/orders.json")
+            new_order.load_orders("orders.json")
             self.order = new_order.order
             self.orderList = new_order
             orderLists.append(new_order)

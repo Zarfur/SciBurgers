@@ -23,8 +23,8 @@ async def main():
     font = pygame.font.SysFont("arial", 24)
     score_txt = "Points: 0"
 
-    player_image = pygame.image.load("Sciburgers/SciBee.png").convert_alpha()
-    background_image = pygame.image.load("Sciburgers/BronxScience.png").convert_alpha()
+    player_image = pygame.image.load("SciBee.png").convert_alpha()
+    background_image = pygame.image.load("BronxScience.png").convert_alpha()
 
     player_image = pygame.transform.scale(player_image, (70, 100)) 
 
@@ -36,13 +36,13 @@ async def main():
     images = {}
     def get_customer_image(customer):
         if customer not in images:
-            image_path = f"SciBurgers/{customer}.png"
+            image_path = f"{customer}.png"
             images[customer] = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (100, 180))
         return images[customer]
 
     def get_ingredient_image(ingredient_type):
         if ingredient_type not in images:
-            image_path = f"SciBurgers/{ingredient_type.label}.png"
+            image_path = f"{ingredient_type.label}.png"
             images[ingredient_type] = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (100, 50))
         return images[ingredient_type]
     
