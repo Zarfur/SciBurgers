@@ -1,4 +1,5 @@
 import math
+import random
 
 import pygame
 
@@ -18,7 +19,7 @@ class GameObject:
         self.hitbox = pygame.Rect(x, y, self.image.get_width(), self.image.get_height())
 
 
-    def draw(self, screen, camera):
+    def draw(self, screen, camera, none):
         screen.blit(self.image, camera.apply(self.position))
         #pygame.draw.rect(screen, (255, 0, 0), self.hitbox, 2)
 
@@ -45,3 +46,8 @@ class GameObject:
         self.hitbox.x = self.position.x
         self.hitbox.y = self.position.y
 
+    def take_damage(self):
+        x = random.randint(-4, 4) 
+        y = random.randint(-12, -8) 
+        self.velocity += pygame.Vector2(x, y)
+        

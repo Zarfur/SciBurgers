@@ -25,8 +25,8 @@ class Ingredient(GameObject):
     THROW_UP = -5
     y_offset = pygame.Vector2(0, -10)
     
-    def __init__(self, x, y, ingType):
-        super().__init__(x, y, self.get_ingredient_image(ingType))
+    def __init__(self, x, y, img, ingType):
+        super().__init__(x, y, img)
         self.ingredient_stack = [ingType]
         self.carrying = False
         self.parent = None
@@ -34,19 +34,14 @@ class Ingredient(GameObject):
         self.defaultY = self.position.y 
         self.damage = 0
 
-    def draw(self, screen, camera):
+    def draw(self, screen, camera, images):
         height = 0
         for ingredient in self.ingredient_stack:
-            ingredient_image = self.get_ingredient_image(ingredient)
+            ingredient_image = images[ingredient]
             draw_y = self.position.y - height - ingredient_image.get_height()
             screen.blit(ingredient_image, camera.apply(pygame.Vector2(self.position.x, draw_y)))
             height += ingredient.offset
 
-    def get_ingredient_image(self, ingredient_type):
-        image_path = f"SciBurgers/{ingredient_type.label}.png"
-        image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (100, 50))
-
-        return image
 
     def collide(self, other):
         if not isinstance(other, Ingredient) or self.carrying or other.carrying: return False

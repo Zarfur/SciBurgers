@@ -24,8 +24,8 @@ class Orderlist:
                             self.order.append(ingType[i])
 
     def draw(self, screen, x, y):
-        height = len(self.order) * 20
-        pygame.draw.rect(screen, (255, 255, 255), (x, y, 200, height))
+        height = len(self.order) * 17 + 10
+        pygame.draw.rect(screen, (255, 255, 255), (x, y, 100, height))
         
         name = self.font.render(self.customer, True, (0, 0, 0))
         screen.blit(name, (x + 5, y))

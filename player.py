@@ -1,4 +1,5 @@
 import math
+import random
 import pygame
 from gameObject import GameObject
 from ingredient import Ingredient
@@ -27,7 +28,7 @@ class Player(GameObject):
                     return True
                 else:
                     self.hp -= 1
-                    return False
+                    return True
 
             if self.current_ingredient is not None: return False
             if isinstance(other, Ingredient):
@@ -48,3 +49,4 @@ class Player(GameObject):
             self.current_ingredient.carrying = False
             self.current_ingredient.throw(self)
             self.current_ingredient = None
+

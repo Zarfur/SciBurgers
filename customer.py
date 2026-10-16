@@ -20,18 +20,17 @@ class Customer(GameObject):
 
     def __init__(self, x, y, image, name, hp):
         super().__init__(x, y, image)
+        self.image = pygame.transform.scale(image, (70, 200)) 
         self.state = state.idle
         self.name = name
         self.hp = hp
         self.order = None
-        self.MAX_SPEED = self.MAX_SPEED - 2
+        self.MAX_SPEED -= 2
         self.target = None
         self.radians = 0
         self.forward = pygame.math.Vector2(math.cos(self.radians), -math.sin(self.radians))
         self.given = False
         self.orderList = None
-
-
 
     def update(self, game_width, game_height):
         if self.velocity.length() > 0.1:
@@ -66,11 +65,14 @@ class Customer(GameObject):
 
     def take_order(self, other, player, ingredients, orderLists):
         if self.hitbox.colliderect(other.hitbox) and self.order is not None:
-            if isinstance(other, Ingredient):
+            if isinstance(other, Ingredient) and other.carrying == False:
 
                 stack = other.ingredient_stack
 
-                if len(stack) < 2: return
+                if len(stack) < 2: return -1
+
+                ingredients.remove(other)
+                if self.orderList in orderLists: orderLists.remove(self.orderList)
 
                 if stack != self.order: 
                     #print("invalid!")
@@ -78,15 +80,10 @@ class Customer(GameObject):
                     self.target = player
                     if player.current_ingredient is other:
                         player.current_ingredient = None
-                    ingredients.remove(other)
-                    if self.orderList in orderLists:
-                        orderLists.remove(self.orderList)
-                    return False
+
+                    return 1
                 #print("valid order!")
-                ingredients.remove(other)
-                if self.orderList in orderLists:
-                    orderLists.remove(self.orderList)
-                return True
+                return 0
         
 
 
@@ -96,7 +93,8 @@ class Customer(GameObject):
             score += 5
         else:
             score += 30
-        customers.remove(self)
+        if self in customers:
+            customers.remove(self)
 
 
     def idle(self):

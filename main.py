@@ -9,7 +9,6 @@ from ingredient import ingType
 from customer import Customer,state
 
 async def main():
-
     GAME_WIDTH = 2600
     GAME_HEIGHT = 1800
     WIDTH = 800
@@ -29,24 +28,32 @@ async def main():
 
     player_image = pygame.transform.scale(player_image, (70, 100)) 
 
-
     player = Player(50,  50, player_image, 1.7)
-    camera = Camera(GAME_WIDTH/2, GAME_HEIGHT/2, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT)
+    camera = Camera(GAME_WIDTH / 2, GAME_HEIGHT / 2, WIDTH, HEIGHT, GAME_WIDTH, GAME_HEIGHT)
 
 
-    def get_image(customer):
-        image_path = f"SciBurgers/{customer}.png"
-        image = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (100, 50))
-        return image
+
+    images = {}
+    def get_customer_image(customer):
+        if customer not in images:
+            image_path = f"SciBurgers/{customer}.png"
+            images[customer] = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (100, 180))
+        return images[customer]
+
+    def get_ingredient_image(ingredient_type):
+        if ingredient_type not in images:
+            image_path = f"SciBurgers/{ingredient_type.label}.png"
+            images[ingredient_type] = pygame.transform.scale(pygame.image.load(image_path).convert_alpha(), (100, 50))
+        return images[ingredient_type]
     
     def generate_objects(list, runtime_objs):
         for i in list:
             x = random.randint(0, GAME_WIDTH)
             y = random.randint(0, GAME_HEIGHT)
             if isinstance(i, str):
-                runtime_objs.append(Customer(x, y, get_image(i), i, 100))
+                runtime_objs.append(Customer(x, y, get_customer_image(i), i, 16))
             else:
-                runtime_objs.append(Ingredient(x, y, i))
+                runtime_objs.append(Ingredient(x, y, get_ingredient_image(i), i))
 
     
     possible_customers = ["Ennio", "Stephanie", "Joseph", "Alex", "Ethan", "Sunay", "Henry", "Ankit"]
@@ -56,16 +63,19 @@ async def main():
     ingredients = []
     all_objects = [player]
     orderlists = []
+    i_frames = 1200
 
     score = 0
+    timer = 0
     
 
     # update 
     def update(objects, camera):
-        nonlocal score_txt, score
+        time = pygame.time.get_ticks()
+        nonlocal score_txt, score, timer
         score_txt = f"Points: {score}"
-        #if len(customers) <= 0: generate_objects(possible_customers, customers)
-        if len(ingredients) <= 1: generate_objects(possible_ingredients, ingredients)
+        if len(customers) <= 0: generate_objects(possible_customers, customers)
+        if len(ingredients) <= 5: generate_objects(possible_ingredients, ingredients)
 
         camera.update(player)
         for obj in objects: obj.update(GAME_WIDTH, GAME_HEIGHT)
@@ -83,15 +93,23 @@ async def main():
         for customer in customers[:]:                    
             if player.check_collision(customer):
                 customer.give_order(orderlists)
-                if customer.state != state.idle:
+                if customer.state != state.idle and time - timer >= i_frames:
+                    timer = time
+                    player.take_damage()
                     score -= 1
             if customer.hp <= 0:
                 customer.ascend(customers)
 
         for customer in customers[:]:
             for ingredient in ingredients[:]:
-                if customer.take_order(ingredient, player, ingredients, orderlists):
-                    customer.ascend(customers)
+                value = customer.take_order(ingredient, player, ingredients, orderlists)
+                if value == 0:
+                    customer.ascend(customers, score)
+                elif value == 1:
+                    customer.take_damage()
+                    customer.hp -= ingredient.damage
+
+
 
 
     # draw
@@ -105,10 +123,10 @@ async def main():
 
         screen.blit(background_image, (0, 0))
         screen.blit(text_surface, text_rect)
-        for obj in objects: obj.draw(screen, camera)
+        for obj in objects: obj.draw(screen, camera, images)
 
         for i, order in enumerate(orderlists):
-            order.draw(screen, 10 + i * 200, 10)
+            order.draw(screen, 10 + i * 100, 10)
 
     running = True
     while running:
